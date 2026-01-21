@@ -15,14 +15,14 @@ Validar construção-
 
 
     
-            **BancodeDados**    EMANDAMENTO *****
+            **BancodeDados**    Concluido *****
 
 Metodos
 
 Cadastrar
 Excluir
 
-            **Relatorios**     EM ANDAMENTO *****
+            **Relatorios**     Concluido *****
 
 Metodos
 
@@ -32,13 +32,17 @@ Filtrar
 Ordenar por data limite
 
 
-**Notificações**
+                    **Notificações**   Concluido
 
 Metodos
 
-??
+VerificarTarefasProximas
 
 
                 **Status** Enum    CONCLUIDO***
 
 Status `Pendente`, `Em andamento`, `Concluído`
+
+
+            **InterfaceExterna   Java FX**   Em Andamento
+
