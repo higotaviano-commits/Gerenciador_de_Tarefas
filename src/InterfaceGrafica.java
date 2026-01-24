@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -13,6 +14,8 @@ public class InterfaceGrafica {
     private Relatorio relatorio;
 
     JButton botaoSalvar;
+    JButton botaoApagar;
+    JButton botaoGerarDados;
     JTextField fieldTitulo;
     JTextField fieldData;
     JTextField fieldDescricao;
@@ -66,7 +69,23 @@ public class InterfaceGrafica {
         fieldDescricao.setText("");
         fieldTitulo.setText("");
         this.atualizaLista(bancoDeDados.getLista());
+        Arquivo.salvarDados(bancoDeDados.getLista());
         JOptionPane.showMessageDialog(null, "Tarefa salva.");
+    }
+
+
+    /// Apagar Tudo
+    public void apagarTudo(){
+        List<Tarefa> listaVazia = new ArrayList<>();
+        this.atualizaLista(listaVazia);
+        Arquivo.salvarDados(listaVazia);
+    }
+
+    /// Gerar Dados
+    public void gerarDados(){
+        List<Tarefa> listaVazia = DadosTeste.gerarDados();
+        this.atualizaLista(listaVazia);
+        Arquivo.salvarDados(listaVazia);
     }
 
 
@@ -88,9 +107,15 @@ public class InterfaceGrafica {
 
     /// Criando o frame
     public void criaInterface() {
+
+
         /// Button
         botaoSalvar = new JButton("Salvar");
         botaoSalvar.addActionListener(e -> this.salvarTarefa());
+        botaoApagar = new JButton("Apagar Tudo");
+        botaoApagar.addActionListener(e -> this.apagarTudo());
+        botaoGerarDados = new JButton("Gerar Dados para teste");
+        botaoGerarDados.addActionListener(e -> this.gerarDados());
 
 
         /// TextField
@@ -137,7 +162,7 @@ public class InterfaceGrafica {
 
 
         JPanel painelNorte = new JPanel(new GridLayout(2, 4, 10, 10));
-        JPanel painelSul = new JPanel(new GridLayout(2, 2, 10, 10));
+        JPanel painelSul = new JPanel(new GridLayout(2, 4, 10, 10));
 
         painelNorte.add(new JLabel("Título"));
         painelNorte.add(fieldTitulo);
@@ -157,8 +182,14 @@ public class InterfaceGrafica {
         painelSul.add(new JLabel("Filtrar por Status"));
         painelSul.add(listaSuspensaFiltro);
 
+
         painelSul.add(new JLabel("Ordenar por"));
         painelSul.add(listaSuspensaOrdenarPorData);
+        painelSul.add(new JLabel(""));
+
+
+        painelSul.add(botaoApagar);
+        painelSul.add(botaoGerarDados);
 
 
         painelPrincipal.add(painelNorte, BorderLayout.NORTH);

@@ -21,7 +21,7 @@ public class Notificacoes {
 
     /// Comecar a notificacao
     public void start (){
-        schedule.scheduleAtFixedRate(this::verificarTarefaProxima, 0, 30, TimeUnit.SECONDS);
+        schedule.scheduleAtFixedRate(this::verificarTarefaProxima, 0, 20, TimeUnit.SECONDS);
     }
 
 

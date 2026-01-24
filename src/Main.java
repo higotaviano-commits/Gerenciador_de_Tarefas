@@ -3,10 +3,12 @@
 public class Main {
     public static void main(String[] args) {
 
-        BancoDeDados dados = new BancoDeDados();
+
+        BancoDeDados dados = new BancoDeDados(Arquivo.carregarDados());
         Relatorio relatorio = new Relatorio(dados);
 
         InterfaceGrafica tela = new InterfaceGrafica(dados, relatorio);
+        tela.atualizaLista(dados.getLista());
         Notificacoes notificacao = new Notificacoes(relatorio);
         notificacao.start();
 
