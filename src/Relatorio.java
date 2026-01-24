@@ -29,20 +29,18 @@ public class Relatorio {
 
 
     /// Método Filtrar por Status
-    public String filtrarPorStatus(Status status) {
+    public List<Tarefa> filtrarPorStatus(Status status) {
         return banco.getLista().stream().
                 filter(s -> s.getStatus() == status).
-                map(Tarefa::toString).
-                collect(Collectors.joining("\n", "============", "\n"));
+                collect(Collectors.toList());
     }
 
 
     /// Ordenar por data limite
-    public String ordenarPorDataLimite() {
+    public List<Tarefa> ordenarPorDataLimite() {
         return banco.getLista().stream().
                 sorted(Comparator.comparing(Tarefa::getDataLimite)).
-                map(Tarefa::toString).
-                collect(Collectors.joining("\n", "============", "\n"));
+                collect(Collectors.toList());
     }
 }
 

@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BancoDeDados {
 
@@ -11,7 +12,8 @@ public class BancoDeDados {
 
     /// Método Get
     public List<Tarefa> getLista() {
-        return lista.stream().toList();
+        return lista.stream().
+                collect(Collectors.toList());
     }
 
 

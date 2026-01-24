@@ -3,8 +3,12 @@
 public class Main {
     public static void main(String[] args) {
 
+        BancoDeDados dados = new BancoDeDados();
+        Relatorio relatorio = new Relatorio(dados);
 
+        InterfaceGrafica tela = new InterfaceGrafica(dados, relatorio);
+        Notificacoes notificacao = new Notificacoes(relatorio);
+        notificacao.start();
 
         }
     }
-}

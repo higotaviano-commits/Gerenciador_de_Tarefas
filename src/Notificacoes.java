@@ -1,4 +1,6 @@
+import javax.swing.*;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -19,18 +21,28 @@ public class Notificacoes {
 
     /// Comecar a notificacao
     public void start (){
-        schedule.scheduleAtFixedRate(this::verificarTarefaProxima, 0, 10, TimeUnit.SECONDS);
+        schedule.scheduleAtFixedRate(this::verificarTarefaProxima, 0, 30, TimeUnit.SECONDS);
     }
 
 
     /// Metodo verificar alertas
-    public String verificarTarefaProxima(){
+    public void verificarTarefaProxima(){
         LocalDate amanha = LocalDate.now().plusDays(1);
-        return relatorio.listarTodosList().stream().
-                filter(tarefa -> tarefa.getDataLimite().plusDays(1) == amanha).
-                map(Tarefa::toString).
-                collect(Collectors.joining("\n", "====== Tarefas com data limite para amanhã ! ======", "\n"));
+        List<Tarefa> filtro = relatorio.listarTodosList().stream().
+                filter(tarefa -> tarefa.getDataLimite().isEqual(amanha)).
+                collect(Collectors.toList());
 
+        if(filtro.isEmpty()){
+            return;
+        }
+
+        String mensagem = filtro.stream()
+                .map(Tarefa::toString)
+                .collect(Collectors.joining("\n", "========== Tarefas com data limite para amanhã ! ==========\n", "\n"));
+
+        SwingUtilities.invokeLater(() -> {
+            JOptionPane.showMessageDialog(null, mensagem);
+        });
     }
 
 

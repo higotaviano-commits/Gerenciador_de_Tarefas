@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Tarefa {
 
@@ -52,7 +53,9 @@ public class Tarefa {
         this.status = status;
     }
 
-
+    public String getDescricao() {
+        return descricao;
+    }
 
     /// toString Override
     @Override
@@ -62,6 +65,6 @@ public class Tarefa {
                 Data Limite: %s
                 Status: %s
                 Descrição: %s
-                """.formatted(titulo, dataLimite, status, descricao);
+                """.formatted(titulo, dataLimite.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), status, descricao);
     }
 }
